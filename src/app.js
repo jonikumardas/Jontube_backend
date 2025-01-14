@@ -13,4 +13,14 @@ app.use(express.urlencoded({extended:true,limit:"100kb"}))
 // its work when we search something by url or when we want to pass some data by url then it will take object into object data 
 app.use(express.static("public"))
 app.use(cookieParser())
+
+
+// defineing route and call from here 
+import router from "./routes/user.route.js";
+app.use("/api/v1",router)
+
+
+
+
+
 export default app

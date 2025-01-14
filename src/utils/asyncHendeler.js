@@ -1,21 +1,22 @@
-
-const asyncHendeler = (fn) => async (req, res, next) => {
-  try {
-    await fn(req, res, next);
-  } catch (error) {
-    res.status(error.code || 500).json({
-      success: false,
-      message: error.message,
+const asyncHendeler = (requsrtHendler) => {
+  return (req, res, next) => {
+    Promise.resolve(requsrtHendler(req, res, next)).catch((err) => {
+      next(err);
     });
-  }
+  };
 };
+export { asyncHendeler };
 
-
-
-
-
-
-
+// const asyncHendeler = (fn) => async (req, res, next) => {
+//   try {
+//     await fn(req, res, next);
+//   } catch (error) {
+//     res.status(error.code || 500).json({
+//       success: false,
+//       message: error.message,
+//     });
+//   }
+// };
 
 
 
@@ -60,13 +61,6 @@ const asyncHendeler=(fn)=>async(req,res,next)=>{
     }
 
 }
-
-
-
-
-
-
-
 
 const asyncHendeler = (requsrtHendler) => {
   (req, res, next) => {
